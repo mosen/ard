@@ -1,4 +1,4 @@
-#!/usr/local/munkireport/munkireport-python2
+#!/usr/local/munkireport/munkireport-python3
 
 import subprocess
 import os
@@ -175,21 +175,6 @@ def main():
     # Remove old init_ard script, if it exists
     if os.path.isfile(os.path.dirname(os.path.realpath(__file__))+'/init_ard'):
         os.remove(os.path.dirname(os.path.realpath(__file__))+'/init_ard')
-        
-    # Create cache dir if it does not exist
-    cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
-    if not os.path.exists(cachedir):
-        os.makedirs(cachedir)
-
-    # Skip manual check
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'manualcheck':
-            print 'Manual check: skipping'
-            exit(0)
-            
-    # Set the encoding
-    reload(sys)  
-    sys.setdefaultencoding('utf8')
 
     # Get results
     result = dict()
@@ -197,6 +182,7 @@ def main():
     result = merge_two_dicts(result, get_ard_info())
     
     # Write ard results to cache
+    cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'ard.plist')
     FoundationPlist.writePlist(result, output_plist)
 #    print FoundationPlist.writePlistToString(result)
