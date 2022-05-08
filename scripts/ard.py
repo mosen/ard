@@ -1,4 +1,4 @@
-#!/usr/local/munkireport/munkireport-python2
+#!/usr/local/munkireport/munkireport-python3
 
 import subprocess
 import os
@@ -184,13 +184,9 @@ def main():
     # Skip manual check
     if len(sys.argv) > 1:
         if sys.argv[1] == 'manualcheck':
-            print 'Manual check: skipping'
+            print('Manual check: skipping')
             exit(0)
             
-    # Set the encoding
-    reload(sys)  
-    sys.setdefaultencoding('utf8')
-
     # Get results
     result = dict()
     result = merge_two_dicts(get_remote_desktop_info(), get_remote_management_info())
